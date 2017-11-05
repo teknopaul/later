@@ -1,0 +1,12 @@
+#!/bin/bash -e
+#
+# Install later from source to /var/lib/later
+#
+
+cd $(dirname $0)
+
+test -d /var/lib/later || mkdir /var/lib/later
+cp -rf * /var/lib/later/
+
+test -h /usr/bin/later || ln -s /var/lib/later/later /usr/bin/later
+
