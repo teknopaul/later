@@ -1,10 +1,10 @@
 ![](later_bug.png)
-# Later
+# Later for Linux
 
 
-A simple command-line issue tracker for Linux, forked from (https://github.com/qznc/later)
+A command-line bug tracker, forked from (https://github.com/qznc/later)
 
-Keeps bugs in text files called _./.later/\<guid\>.issue_
+Keeps issues in text files called _./.later/\<guid\>.issue_
 
 Why? [discussion](https://news.ycombinator.com/item?id=1620168)  because the venerable _sd_ has stopped working with latest Ubuntu releases.
 
@@ -16,7 +16,7 @@ Install with
 
 	sudo ./install
 
-Set you _EDITOR_ variable.
+Set your _EDITOR_ variable.
 
 ## Usage
 
@@ -26,6 +26,8 @@ _cd_ to your project directory.
 
 	later init
 	later bug "description here..."
+
+Includes **/etc/bash_completion.d/later** so typing _later \[tab\]_ works as expected.
 
 ## Commands
 
@@ -47,3 +49,4 @@ _cd_ to your project directory.
 - **delete-closed** - delete all closed issues
 - **list-subdirs** - show issue list of subdirs
 - **revision** - manage revisions
+
