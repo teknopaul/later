@@ -160,6 +160,10 @@ def be_gen_path(guid):
 	return os.path.join(_CONFIG.get("data_dir", ""), guid + ".issue")
 
 @hooked
+def be_new_issue():
+	return Issue()
+
+@hooked
 def be_all_guids():
 	for path in iglob(be_gen_path("*")):
 		yield os.path.basename(path)[:-6]
