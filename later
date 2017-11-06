@@ -10,7 +10,7 @@ from datetime import datetime
 from tempfile import mkstemp
 
 _SCRIPT_DIR = "/".join(sys.argv[0].split("/")[:-1]) 
-_PLUGINS_DIR = _SCRIPT_DIR + "/plugins"
+_PLUGINS_DIR = "/var/lib/later/plugins"
 _CONFIG_FILE_NAME = "config"
 _DATA_DIR = ".later"
 
@@ -305,7 +305,14 @@ If none specified a new issue is generated (like add does.)"""
 
 @hooked
 def cmd_cat(args):
-	cmd_show(args)
+	"""Show a specific issue."""
+	if not args:
+		error("need guid argument")
+	guid = _HOOKS.be_complete_guid(args[0])
+	if not guid:
+		return
+	issue = _HOOKS.be_load_issue(guid)
+	print issue.longString()
 
 @hooked
 def cmd_show(args):
@@ -366,8 +373,8 @@ Usage is "%s <cmd> ...", where <cmd> is one of
 \033[1m confirm\033[0m <guid>              set status to confirmed
 \033[1m assign\033[0m <guid> <developer>   set responsible to developer
 \033[1m ls\033[0m <bug|feat>               show unclosed issues ordered by priority
-\033[1m list\033[0m                        show all issues in short
-\033[1m show|cat\033[0m <guid>             show issue <guid> completely
+\033[1m list\033[0m                        show all issues in short form
+\033[1m cat|show\033[0m <guid>             show issue <guid> completely
 
 \033[1m help\033[0m <cmd>                  shows documentation for <cmd>
 

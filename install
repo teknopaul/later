@@ -17,3 +17,7 @@ cp -rf * /var/lib/later/
 
 test -h /usr/bin/later || ln -s /var/lib/later/later /usr/bin/later
 
+cp -f ./bash_completion.d/later /etc/bash_completion.d/later
+chown root.root /etc/bash_completion.d/later
+chmod 444 /etc/bash_completion.d/later
+

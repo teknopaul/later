@@ -1,0 +1,17 @@
+
+
+_later_ops() {
+    cur=${COMP_WORDS[COMP_CWORD]}
+    if [[ "$COMP_LINE" == later\ edit\ * ]] || [[ "$COMP_LINE" == later\ cat\ * ]] || [[ "$COMP_LINE" == later\ show\ * ]] || [[ "$COMP_LINE" == later\ close\ * ]] || [[ "$COMP_LINE" == later\ rm\ * ]]
+    then
+        words=$(cd ./.later; ls *.issue | sed s/\.issue//g )
+        COMPREPLY=( $( compgen -W "$words" -- $cur ) )
+    elif [[ "$COMP_LINE" == later\ * ]]
+    then
+        COMPREPLY=( $( compgen -W 'init bug feat add ls edit show cat close confirm assign list help schedule htmlreport delete del rm delete-closed list-subdirs revision' -- $cur ) )
+    fi
+    return 0
+}
+
+
+complete -F _later_ops later
