@@ -304,6 +304,10 @@ If none specified a new issue is generated (like add does.)"""
 		print "Issue stored as", issue.guid
 
 @hooked
+def cmd_cat(args):
+	cmd_show(args)
+
+@hooked
 def cmd_show(args):
 	"""Show a specific issue."""
 	if not args:
@@ -353,25 +357,29 @@ _USAGE = """\
 A command-line issue tracker for a lazy developer.
 Usage is "%s <cmd> ...", where <cmd> is one of
 								
-init						create dir in current directory
-add "msg"					report new issue with title "msg"
-edit <guid>					edit issue with the given guid
-close <guid>				set status to closed
-confirm <guid>				set status to confirmed
-assign <guid> <developer>	set responsible to developer
-list						show all issues in short
-show <guid>					show issue <guid> completely
-help <cmd>					shows documentation for <cmd>
+\033[1m init\033[0m                        create dir in current directory
+\033[1m add\033[0m "msg"                   report new issue with title "msg"
+\033[1m bug\033[0m "msg"                   new bug
+\033[1m feat\033[0m "msg"                  new feature
+\033[1m edit\033[0m <guid>                 edit issue with the given guid
+\033[1m close\033[0m <guid>                set status to closed
+\033[1m confirm\033[0m <guid>              set status to confirmed
+\033[1m assign\033[0m <guid> <developer>   set responsible to developer
+\033[1m ls\033[0m <bug|feat>               show unclosed issues ordered by priority
+\033[1m list\033[0m                        show all issues in short
+\033[1m show|cat\033[0m <guid>             show issue <guid> completely
 
-PLUGINS
-=======
+\033[1m help\033[0m <cmd>                  shows documentation for <cmd>
 
-schedule					calculates/show deadlines
-htmlreport					generate html report
-delete <guid>				delete issue <guid>
-delete-closed				delete all closed issues
-list-subdirs				show issue list of subdirs
-revision					manage revisions
+ PLUGINS
+ =======
+
+\033[1m schedule\033[0m                    calculates/show deadlines
+\033[1m htmlreport\033[0m                  generate html report
+\033[1m delete|del|rm\033[0m <guid>        delete issue <guid>
+\033[1m delete-closed\033[0m               delete all closed issues
+\033[1m list-subdirs\033[0m                show issue list of subdirs
+\033[1m revision\033[0m                    manage revisions
 """ % (sys.argv[0])
 
 @hooked

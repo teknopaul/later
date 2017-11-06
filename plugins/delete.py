@@ -22,6 +22,8 @@ def cmd_delete_closed(args):
 
 def plugin_init(hooks):
 	global _HOOKS
+	hooks["cmd_rm"] = cmd_delete
+	hooks["cmd_del"] = cmd_delete
 	hooks["cmd_delete"] = cmd_delete
 	hooks["cmd_delete-closed"] = cmd_delete_closed
 	_HOOKS = hooks
