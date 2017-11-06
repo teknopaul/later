@@ -3,6 +3,13 @@
 # Install later from source to /var/lib/later
 #
 
+if [[ $(id -u) -ne 0 ]]
+then
+	echo running as root
+	sudo $0
+	exit $?
+fi
+
 cd $(dirname $0)
 
 test -d /var/lib/later || mkdir /var/lib/later
