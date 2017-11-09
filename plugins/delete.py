@@ -18,7 +18,9 @@ def cmd_delete_closed(args):
 	"""Delete all closed issues permanently."""
 	assert len(args) == 0
 	for guid in _HOOKS.be_all_guids():
-		cmd_delete([guid])
+		iss = _HOOKS.be_load_issue(guid)
+		if iss.properties["status"] == "closed":
+			_HOOKS.be_delete_issue(guid)
 
 def plugin_init(hooks):
 	global _HOOKS
