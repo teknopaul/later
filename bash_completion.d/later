@@ -4,7 +4,7 @@ _later_ops() {
     cur=${COMP_WORDS[COMP_CWORD]}
     if [[ "$COMP_LINE" == later\ edit\ * ]] || [[ "$COMP_LINE" == later\ cat\ * ]] || [[ "$COMP_LINE" == later\ show\ * ]] || [[ "$COMP_LINE" == later\ close\ * ]] || [[ "$COMP_LINE" == later\ rm\ * ]]
     then
-        words=$(cd ./.later; ls *.issue | sed s/\.issue//g )
+        words=$(if [[ -d .later ]]; then cd ./.later; ls *.issue | sed s/\.issue//g; fi)
         COMPREPLY=( $( compgen -W "$words" -- $cur ) )
     elif [[ "$COMP_LINE" == later\ * ]]
     then
